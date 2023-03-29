@@ -9,7 +9,7 @@ def get_sqalchemy_link(environment: str) -> str:
     if environment == "HOME":
         return f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('PG_HOST')}:{int(os.getenv('PG_PORT'))}/{os.getenv('DB_NAME')}"
     else:
-        return f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DEV_PASS')}@{os.getenv('DEV_HOST')}:{os.getenv('PG_HOST')}/{os.getenv('DB_NAME')}"
+        return f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DEV_PASS')}@{os.getenv('DEV_HOST')}:{int(os.getenv('PG_PORT'))}/{os.getenv('DB_NAME')}"
 
 
 class Config:
