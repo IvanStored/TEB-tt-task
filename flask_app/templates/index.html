@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% include "navbar.html" %}
+{% block content %}
+<div class="d-flex align-items-center h-100" style="background-color: #D6D6D6;">
+    <div class="container">
+        <div class="row justify-content-center">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <h4>{{ message }}</h4>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for user in users_list %}
+                    <div class="col">
+                        <div class="card h-100">
+                            {% if user.photo_url != "" %}
+                                <img src="{{ user.photo_url }}" class="card-img-top" alt=""/>
+                            {% elif user.gender == "Male" %}
+                                <img src="{{ url_for("static", filename="default_man.png")}}" class="card-img-top" alt=""/>
+                            {% elif user.gender == "Female" %}
+                                <img src="{{ url_for("static", filename="default_woman.jpg")}}" class="card-img-top" alt=""/>
+                            {% else %}
+                                <img src="{{ url_for("static", filename="default_other.jpg")}}" class="card-img-top" alt=""/>
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">@{{ user.user_name }}</h5>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ url_for('users.get_user_by_id', user_id = user.user_id) }}" class="btn btn-outline-dark btn-rounded" data-mdb-ripple-color="dark">More info</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

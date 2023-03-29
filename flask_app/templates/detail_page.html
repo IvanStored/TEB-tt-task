@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% include "navbar.html" %}
+{% block content %}
+<div class="d-flex align-items-center h-100" style="background-color: #D6D6D6;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card">
+                    {% if user.photo_url != "" %}
+                    <img src="{{ user.photo_url }}" class="card-img-top" alt=""/>
+                    {% elif user.gender == "Male" %}
+                    <img src="{{ url_for("static", filename="default_man.png")}}" class="card-img-top" alt=""/>
+                    {% elif user.gender == "Female" %}
+                    <img src="{{ url_for("static", filename="default_woman.jpg")}}" class="card-img-top" alt=""/>
+                    {% else %}
+                    <img src="{{ url_for("static", filename="default_other.jpg")}}" class="card-img-top" alt=""/>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">@{{ user.user_name }} ({{ user.user_id }})</h5>
+                        <p class="card-text">Bio: {{ user.bio }}</p>
+                    </div>
+                    <ul class="list-group list-group-light list-group-small">
+                        <li class="list-group-item px-4">First_name: {{ user.first_name }}</li>
+                        <li class="list-group-item px-4">Last_name: {{ user.last_name }}</li>
+                        <li class="list-group-item px-4">Phone number: {{ user.phone }}</li>
+                        <li class="list-group-item px-4">Age: {{ user.age }}</li>
+                        <li class="list-group-item px-4">Gender: {{ user.gender }}</li>
+                        <li class="list-group-item px-4">Premium: {{ user.is_premium }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
