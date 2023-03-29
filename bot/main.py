@@ -44,7 +44,7 @@ async def cmd_start(message: types.Message, state: FSMContext) -> None:
         await message.answer(text="Hello, answer please at follow questions:")
         await message.reply(
             text="""
-            Create a password(he will be save in hash)
+            Create a password(it would be save in hash)
                     - At least 8 characters long
                     - Contains at least one uppercase letter
                     - Contains at least one lowercase letter
@@ -55,7 +55,9 @@ async def cmd_start(message: types.Message, state: FSMContext) -> None:
         )
     else:
         await state.finish()
-        await message.answer(text="You already have account:", reply_markup=None)
+        await message.answer(
+            text="You already have account: /profile", reply_markup=None
+        )
 
 
 @dp.message_handler(
@@ -200,7 +202,8 @@ async def get_phone(message: types.Message, state: FSMContext) -> None:
             await message.answer(text=result, reply_markup=markup)
         else:
             await message.answer(
-                "Now you can back to site and login!", reply_markup=markup
+                "Now you can back to https://teb-tt-task.onrender.com and login!",
+                reply_markup=markup,
             )
     logging.info("Finish\n=================")
     await state.finish()
@@ -220,6 +223,9 @@ async def profile(message: types.Message) -> None:
         await message.answer(
             text=md.text(
                 md.text("Hi! Nice to meet you,", md.bold(user.first_name)),
+                md.text(
+                    f"{'Please, login with phone number' if user.user_name == '' else f'Username: {user.user_name}'}"
+                ),
                 md.text("Age:", md.code(user.age)),
                 md.text("Gender:", user.gender),
                 md.text("Phone:", user.phone),

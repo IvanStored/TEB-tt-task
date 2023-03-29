@@ -22,10 +22,16 @@
                     <ul class="list-group list-group-light list-group-small">
                         <li class="list-group-item px-4">First_name: {{ user.first_name }}</li>
                         <li class="list-group-item px-4">Last_name: {{ user.last_name }}</li>
-                        <li class="list-group-item px-4">Phone number: {{ user.phone }}</li>
+                        <li class="list-group-item px-4">Phone number: {{ user.phone }} <i class="fa-solid fa-phone-volume"></i></li>
                         <li class="list-group-item px-4">Age: {{ user.age }}</li>
-                        <li class="list-group-item px-4">Gender: {{ user.gender }}</li>
-                        <li class="list-group-item px-4">Premium: {{ user.is_premium }}</li>
+                        {% if user.gender == "Male" %}
+                            <li class="list-group-item px-4">Gender: {{ user.gender }} <i class="fa-solid fa-mars"></i></li>
+                        {% elif user.gender == "Female" %}
+                            <li class="list-group-item px-4">Gender: {{ user.gender }} <i class="fa-solid fa-venus"></i></li>
+                        {% else %}
+                            <li class="list-group-item px-4">Gender: {{ user.gender }}</li>
+                        {% endif %}
+                        <li class="list-group-item px-4">Premium <i class="fa-solid fa-crown" style="color: #1a5fb4;"></i>: {{ user.is_premium }}</li>
                     </ul>
                 </div>
             </div>

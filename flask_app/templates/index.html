@@ -14,9 +14,9 @@
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 {% for user in users_list %}
                     <div class="col">
-                        <div class="card h-100">
+                        <div class="card ">
                             {% if user.photo_url != "" %}
-                                <img src="{{ user.photo_url }}" class="card-img-top" alt=""/>
+                                <img src="{{ user.photo_url }}" class="card-img-top" width=20px alt=""/>
                             {% elif user.gender == "Male" %}
                                 <img src="{{ url_for("static", filename="default_man.png")}}" class="card-img-top" alt=""/>
                             {% elif user.gender == "Female" %}
@@ -38,5 +38,3 @@
     </div>
 </div>
 {% endblock %}
-</body>
-</html>

@@ -19,10 +19,12 @@ auth = Blueprint("auth", __name__)
 @auth.route("/login", methods=["GET", "POST"])
 def login() -> str | Response:
     if request.method == "POST":
-        username = request.form.get("username")
+        username_or_phone = request.form.get("username")
         password = request.form.get("password")
 
-        if user := user_service.get_user_by_username(user_name=username):
+        if user := user_service.get_user_by_username_or_phone(
+            username_or_phone=username_or_phone
+        ):
             if check_password_hash(user.password, password):
                 login_user(user)
                 return redirect(url_for("users.get_all_users"))

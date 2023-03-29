@@ -56,10 +56,15 @@ class UserService:
         ).scalar_one_or_none()
         return user
 
-    def get_user_by_username(self, user_name: str) -> Any:
-        user = self.db.session.execute(
-            db.select(User).where(User.user_name == user_name)
-        ).scalar_one_or_none()
+    def get_user_by_username_or_phone(self, username_or_phone: str) -> Any:
+        if username_or_phone.startswith("+") or username_or_phone.startswith("3"):
+            user = self.db.session.execute(
+                db.select(User).where(User.phone == username_or_phone)
+            ).scalar_one_or_none()
+        else:
+            user = self.db.session.execute(
+                db.select(User).where(User.user_name == username_or_phone)
+            ).scalar_one_or_none()
         return user
 
     def get_users_list(self) -> ScalarResult:
